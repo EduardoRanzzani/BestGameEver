@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
   public static PlayerController instance;
 
+  [SerializeField] private AudioSource jumpSoundEffect;
+  [SerializeField] private AudioSource deathSoundEffect;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
   {
     if (Input.GetButtonDown("Jump") && IsGrounded())
     {
+      jumpSoundEffect.Play();
       rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpForce);
     }
   }
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour
 
   private void PlayerDie()
   {
+    deathSoundEffect.Play();
     rigidbody2D.bodyType = RigidbodyType2D.Static;
     animator.SetTrigger("death");
   }
